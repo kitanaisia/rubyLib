@@ -826,3 +826,11 @@ def parseHyp(hyp)
     
     return [asr_result, word_confidence]
 end
+
+def putsDoubleHash(hash)
+    hash.each { |key1,hash_parent| 
+        hash_parent.each { |key2, value| 
+            puts key1.inspect + "\t" + key2.inspect + "\t" + value.inspect
+        }
+    }
+end
