@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
-$KCODE="utf-8"
-$LOAD_PATH.push("./")
+# -*- coding: utf-8 -*-
 
 # ロードミスのエラー連発のため，一時的にコメントアウト
 # require "vital"
