@@ -771,6 +771,7 @@ end
 #   【戻り値】
 #   コサイン尺度(Integer)
 #====================================================================================================
+
 def calcCosineScale(vector1, vector2)
     # calc inner product
     inner_product = 0
