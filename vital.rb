@@ -605,7 +605,7 @@ def getWordList(arg, kind, option = "")
             word_list = getWordListFromXML(arg, option)
         #if 1st argument isn't XML, open the file (then variable "doc" becomes sentence) 
         else
-            puts File::expand_path(arg)
+            # puts File::expand_path(arg)
             doc = open(File::expand_path(arg)).read
             word_list = getWordListFromSentence(doc, option)
         end
