@@ -795,7 +795,12 @@ def calcCosineScale(vector1, vector2)
     }
     vector2_norm = Math::sqrt(vector2_norm)
     
-    cos_scale = inner_product / (vector1_norm * vector2_norm)
+    if vector1_norm * vector2_norm == 0
+        cos_scale = 0.0
+    else
+        cos_scale = inner_product / (vector1_norm * vector2_norm)
+    end
+    
 
     return cos_scale
 end
