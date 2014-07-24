@@ -105,7 +105,8 @@ end
 
 def makePMIHash(pmi_file_path)
 	doc = open(pmi_file_path).read
-	pmi_hash = Hash.new{|hash_parent,key1| hash_parent[key1] = Hash.new{|hash_child,key2| hash_child[key2] = 0}}
+	# pmi_hash = Hash.new{|hash_parent,key1| hash_parent[key1] = Hash.new{|hash_child,key2| hash_child[key2] = 0}}
+    pmi_hash = Hash.new { |h, k| h[k] = Hash.new(0) }
 	
 	doc.lines {|line|
 		#declare

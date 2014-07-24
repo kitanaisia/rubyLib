@@ -805,6 +805,34 @@ def calcCosineScale(vector1, vector2)
     return cos_scale
 end
 
+# 
+# PMIによるベクトルの類似度を計算する
+# 
+# vector1:ハッシュ．キーが単語であるようにすること．
+# vector2:ハッシュ．キーが単語であるようにすること．
+# pmi_hash:PMI値を格納した二重ハッシュ．
+#
+# return: 類似度，float．
+#
+def calcPMISimilarity(vector1, vector2, pmi_hash)
+    similarity = 0.0
+    wordlist_1 = vector1.keys
+    wordlist_2 = vector2.keys
+    plus_count = wordlist_1.length * wordlist_2.length
+    
+    wordlist_1.each { |word1| 
+        wordlist_2.each { |word2| 
+            similarity += pmi_hash[word1][word2]
+        }
+    }
+
+    if plus_count != 0
+        similarity /= plus_count.to_f
+    end
+
+    return similarity
+end
+
 # ====================================================================================================
 #   Julius認識結果のhypファイルの内容をパース，認識結果の分かち書きをStringで，単語信頼度をArrayで返す
 # argument : hyp(string)
