@@ -107,7 +107,7 @@ def makePMIHash(pmi_file_path)
 	doc = open(pmi_file_path).read
 	pmi_hash = Hash.new{|hash_parent,key1| hash_parent[key1] = Hash.new{|hash_child,key2| hash_child[key2] = 0}}
 	
-	doc.each {|line|
+	doc.lines {|line|
 		#declare
 		word1 = ""
 		word2 = ""
@@ -115,8 +115,7 @@ def makePMIHash(pmi_file_path)
 
 		#find "word combination" and "PMI" from "pmi_file"
         # 関谷先輩の形式に合わせるため，一時的に\t から " "とした．
-		# if line =~ /^(.*?)\t(.*?)\t(.*?)$/
-		if line =~ /^(.*?) (.*?) (.*?)$/
+		if line =~ /^(.*?)\t(.*?)\t(.*?)$/
 			word1 = $1
 			word2 = $2
 			pmi = $3.to_f
