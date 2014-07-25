@@ -21,7 +21,7 @@ module NTCIR
         slide_list.each { |slide_path| 
             content = File::open(slide_path).read
             
-            if content.length <= 100
+            if content.length <= min_char
                 next
             end
 
