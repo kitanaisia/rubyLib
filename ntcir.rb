@@ -74,8 +74,13 @@ module NTCIR
     end
 
     # 
+    # get_sumpmi
+    #   文章中の単語のsumPMI値を計算する．
     #
+    #   sentence:文章．
+    #   pmi_hash:2単語のPMI値を格納した二重ハッシュ
     #
+    #   sum_pmi:文章中の単語のsumPMI値を格納したハッシュ
     #
     def get_sumPMI(sentence, pmi_hash)
         sum_pmi = Hash::new(0)
