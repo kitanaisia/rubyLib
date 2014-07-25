@@ -72,4 +72,30 @@ module NTCIR
 
         return coherency
     end
+
+    # 
+    #
+    #
+    #
+    def get_sumPMI(sentence, pmi_hash)
+        sum_pmi = Hash::new(0)
+            
+        noun_list = getWordList(sentence, "sentence")\
+                   .select{|elem| elem[1] == "名詞"}\
+                   .map{|elem| elem[0]}
+
+        combination_arr = noun_list.combination(2)\
+                                   .to_a\
+                                   .collect{|elem| elem.sort}\
+                                   .uniq
+
+        combination_arr.each { |combination| 
+            word_interest = combination[0]
+            word_other = combination[1]
+
+            sum_pmi[word_interest] += pmi_hash[word_interest][word_other]
+        }
+
+        return sum_pmi
+    end
 end
