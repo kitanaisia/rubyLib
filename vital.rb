@@ -640,7 +640,7 @@ def getWordList(arg, kind, option = "")
         #do nothing
     else
         puts "getWordList::invalid kind!" + " kind is"
-        p option
+        p kind
     end
     
     return word_list
