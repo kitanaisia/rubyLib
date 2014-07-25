@@ -11,7 +11,7 @@ module NTCIR
     #   
     #   checked_slide_list: 不要なスライドを取り除いた，検索対象のファイルリスト
     #
-    def delete_slide(slide_list, pmi_hash)
+    def self.delete_slide(slide_list, pmi_hash)
         min_char = 100
         acceptance_rate = 0.5    # 50%
         
@@ -49,7 +49,7 @@ module NTCIR
     #
     #   coherency:文章の一貫性
     #
-    def calc_coherency(sentence, pmi_hash)
+    def self.calc_coherency(sentence, pmi_hash)
         coherency = 0.0
         
         noun_list = getWordList(sentence, "sentence")\
@@ -82,7 +82,7 @@ module NTCIR
     #
     #   sum_pmi:文章中の単語のsumPMI値を格納したハッシュ
     #
-    def get_sumPMI(sentence, pmi_hash)
+    def self.get_sumPMI(sentence, pmi_hash)
         sum_pmi = Hash::new(0)
             
         noun_list = getWordList(sentence, "sentence")\
