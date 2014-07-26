@@ -8,12 +8,12 @@ module NTCIR
     #   
     #   slide_list: 検索対象のファイルリスト
     #   pmi_hash: 2単語間のPMI値を格納した二重ハッシュ
+    #   acceptance_rate: 受理率．どれだけのスライドを検索に使用するか．[0-1]で指定
     #   
     #   checked_slide_list: 不要なスライドを取り除いた，検索対象のファイルリスト
     #
-    def self.delete_slide(slide_list, pmi_hash)
+    def self.delete_slide(slide_list, pmi_hash, acceptance_rate=0.5)
         min_char = 100
-        acceptance_rate = 0.5    # 50%
         
         checked_slide_list = []
 
@@ -34,7 +34,7 @@ module NTCIR
         number_of_accept = (checked_slide_list.length * acceptance_rate).to_int  # 受理するスライドの枚数
 
         checked_slide_list.sort! { |a,b| b[1]<=>a[1] }
-        checked_slide_list.slice!( 0..(number_of_accept-1) )
+        checked_slide_list.slice!( (number_of_accept)..(checked_slide_list.length-1) )
         checked_slide_list.map!{|elem| elem[0]}
         
         return checked_slide_list
@@ -103,4 +103,10 @@ module NTCIR
 
         return sum_pmi
     end
+
+    # 
+    # 
+    #   検索クエリに対して，講演全体で文章を検索し，類似度を測る
+    #
+    #
 end
