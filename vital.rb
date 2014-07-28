@@ -822,7 +822,11 @@ def calcPMISimilarity(vector1, vector2, pmi_hash)
     
     wordlist_1.each { |word1| 
         wordlist_2.each { |word2| 
-            similarity += pmi_hash[word1][word2]
+            if word1 == word2
+                similarity += 1
+            elsif
+                similarity += pmi_hash[word1][word2]
+            end
             # similarity += vector1[word1] * vector2[word2] * pmi_hash[word1][word2]
         }
     }
