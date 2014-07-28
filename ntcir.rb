@@ -29,7 +29,6 @@ module NTCIR
             checked_slide_list.push([ slide_path, coherency ])
         }
 
-
         # 一貫性によるスクリーニング
         number_of_accept = (checked_slide_list.length * acceptance_rate).to_int  # 受理するスライドの枚数
 
@@ -103,6 +102,35 @@ module NTCIR
         }
 
         return sum_pmi
+    end
+
+    # 
+    # calc_ap
+    #   クエリに対しての平均適合率(Average Precision)を計算する．
+    #
+    #   result:検索結果．スライド番号を要素とし，順位の降順に並べたArray
+    #   answer:正解．スライド番号を要素とし，順位の降順に並べたArray
+    #
+    #   ap:平均適合率
+    #
+    def self.calc_ap(result, answer)
+        numerator = 1.0       # 分子
+        denominator = 1.0     # 分母
+        ap = 0
+
+        result.each { |slide_number| 
+            index = answer.index(slide_number)
+            if index != nil
+                ap += (numerator / denominator)
+                numerator += 1
+            end
+
+            denominator += 1
+        }
+
+        ap /= answer.length.to_f
+
+        return ap
     end
 
     # 
