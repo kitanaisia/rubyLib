@@ -12,7 +12,7 @@ module NTCIR
     #   
     #   checked_slide_list: 不要なスライドを取り除いた，検索対象のファイルリスト
     #
-    def self.delete_slide(slide_list, pmi_hash, acceptance_rate=0.5)
+    def self.delete_slide(slide_list, pmi_hash, acceptance_rate=1.0)
         min_char = 100
         
         checked_slide_list = []
@@ -34,6 +34,7 @@ module NTCIR
         number_of_accept = (checked_slide_list.length * acceptance_rate).to_int  # 受理するスライドの枚数
 
         checked_slide_list.sort! { |a,b| b[1]<=>a[1] }
+        # arr.slice!(n, n-1)で，arrは何も変わらない
         checked_slide_list.slice!( (number_of_accept)..(checked_slide_list.length-1) )
         checked_slide_list.map!{|elem| elem[0]}
         
