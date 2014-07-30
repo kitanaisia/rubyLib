@@ -806,7 +806,7 @@ def calcCosineScale(vector1, vector2)
 end
 
 # 
-# PMIによるベクトルの類似度を計算する
+# PMIによるベクトルの類似度を，基底の向きのみで計算する
 # 
 # vector1:ハッシュ．キーが単語であるようにすること．
 # vector2:ハッシュ．キーが単語であるようにすること．
@@ -827,13 +827,46 @@ def calcPMISimilarity(vector1, vector2, pmi_hash)
             elsif
                 similarity += pmi_hash[word1][word2]
             end
-            # similarity += vector1[word1] * vector2[word2] * pmi_hash[word1][word2]
         }
     }
 
     if plus_count != 0
         similarity /= plus_count.to_f
     end
+
+    return similarity
+end
+
+# 
+# PMIによるベクトルの類似度を，重み付きで計算する
+# 
+# vector1:ハッシュ．キーが単語であるようにすること．
+# vector2:ハッシュ．キーが単語であるようにすること．
+# pmi_hash:PMI値を格納した二重ハッシュ．
+#
+# return: 類似度，float．
+#
+def calcPMISimilarityWithWeight(vector1, vector2, pmi_hash)
+    similarity = 0.0
+    wordlist_1 = vector1.keys
+    wordlist_2 = vector2.keys
+    
+    denominator = 0.0
+    wordlist_1.each { |word1| 
+        wordlist_2.each { |word2| 
+            if word1 == word2
+                similarity += vector1[word1] * vector2[word2]
+            elsif
+                similarity += vector1[word1] * vector2[word2] * pmi_hash[word1][word2]
+            end
+            denominator += vector1[word1] * vector2[word2]
+        }
+    }
+
+    if denominator == 0
+        return 0.0
+    end
+    similarity /= denominator
 
     return similarity
 end
