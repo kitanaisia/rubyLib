@@ -133,9 +133,14 @@ module NTCIR
         return ap
     end
 
-    # 
-    # 
-    #   検索クエリに対して，講演全体で文章を検索し，類似度を測る
-    #
-    #
+    def self.read_all_file(file_list)
+        result_str = ""
+        file_list.each { |file_path| 
+            result_str += File::open(file_path).read
+            result_str += "\n"
+        }
+        
+        return result_str
+    end
+
 end
