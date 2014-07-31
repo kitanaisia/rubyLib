@@ -665,6 +665,9 @@ def getWordListFromSentence(sentence, option="")
 
     #doc = open(File::expand_path(file_path)).read
     word_list = MeCab::Tagger.new("--node-format=%m,%f[0]\\n --eos-format="" ").parse(sentence)
+    if word_list == nil 
+        return []
+    end
     word_list = word_list.split("\n")            #split by WordInformation
     word_list.collect!{|word| word.split(",")}    #split by morpheme and part of speech
     
