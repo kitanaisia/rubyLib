@@ -89,8 +89,6 @@ module NTCIR
                    .select{|elem| elem[1] == "名詞"}\
                    .map{|elem| elem[0]}
 
-        p noun_list
-
         combination_arr = noun_list.combination(2)\
                                    .to_a\
                                    .collect{|elem| elem.sort}\
