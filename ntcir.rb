@@ -89,6 +89,8 @@ module NTCIR
                    .select{|elem| elem[1] == "名詞"}\
                    .map{|elem| elem[0]}
 
+        p noun_list
+
         combination_arr = noun_list.combination(2)\
                                    .to_a\
                                    .collect{|elem| elem.sort}\
@@ -98,7 +100,9 @@ module NTCIR
             word_interest = combination[0]
             word_other = combination[1]
 
+            # puts "#{word_interest}\t#{word_other}\t#{pmi_hash[word_interest][word_other]}"
             sum_pmi[word_interest] += pmi_hash[word_interest][word_other]
+            sum_pmi[word_other] += pmi_hash[word_interest][word_other]
         }
 
         return sum_pmi
